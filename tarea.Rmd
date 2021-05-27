@@ -1,0 +1,25 @@
+---
+title: "Tarea_R_Python"
+author: "Lucas Tapia"
+date: "27-05-2021"
+output: html_document
+---
+
+```{r}
+library(reticulate)
+library(devtools)
+library(tidyverse)
+use_python("/usr/local/bin/python")
+```
+
+```{r}
+data <- data.frame(mtcars)
+data
+data <- select(data, mpg, hp)
+data
+```
+```{python}
+print(r.data)
+```
+
+
