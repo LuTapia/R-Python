@@ -4,6 +4,9 @@ author: "Lucas Tapia"
 date: "27-05-2021"
 output: html_document
 ---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 ```{r}
 library(reticulate)
@@ -18,8 +21,31 @@ data
 data <- select(data, mpg, hp)
 data
 ```
+
 ```{python}
 print(r.data)
 ```
-
+```{r}
+install.packages("reticulate")
+library(reticulate)
+use_python("/usr/local/bin/python")
+```
+```{python, echo=FALSE}
+import pandas as pd
+x = pd.read_csv("file.csv")
+print (x)
+```
+```{r}
+py_config()
+use_python("/usr/local/bin/python")
+scipy <- import("scipy")
+py_install("pandas")
+x = pandas.read_csv("file.csv")
+print (x)
+```
+```{python}
+import pandas
+x = pandas.read_csv("file.csv")
+print (x)
+```
 
