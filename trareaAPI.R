@@ -187,7 +187,7 @@ ggplot(datos2018_19_sub, aes(x = IDH.rank, y = IDH.propio.rank)) +
   theme_bw() + geom_smooth(span = 0.8, fill = "red", colour = "red4", 
                            lty = 2, size = 1)
 
-#tabla comparativa HDI
+#Tabla comparativa HDI
 tablaIDH <- select(datos2018_19_sub, Country, HDI, IDH.rank, IDH.propio, IDH.propio.rank)
-#tabla HDI propio
+#Tabla HDI propio
 tablaIDH1 <- select(tablaIDH, Country, IDH.propio)
