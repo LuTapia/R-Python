@@ -4,7 +4,7 @@ library(reshape2)
 library(readxl)
 library(ggplot2)
 library(dplyr)
-
+#library(plotly)
 rm(list = ls())
 ##4.7
 
@@ -211,6 +211,7 @@ ggplot(tablaIDH1, aes(x = I.Education.alt, y = IDH.propio)) +
   labs(x = "Índice de Educación", 
        y = "HDI propio")
 
+#plot_ly(data=tablaIDH1, x =  ~I.Income, y =  ~IDH.propio) #muestra valor de los puntos
 ggplot(tablaIDH1, aes(x = I.Income, y = IDH.propio)) + 
   geom_point() + 
   geom_smooth()+
