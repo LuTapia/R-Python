@@ -190,4 +190,43 @@ ggplot(datos2018_19_sub, aes(x = IDH.rank, y = IDH.propio.rank)) +
 #Tabla comparativa HDI
 tablaIDH <- select(datos2018_19_sub, Country, HDI, IDH.rank, IDH.propio, IDH.propio.rank)
 #Tabla HDI propio
-tablaIDH1 <- select(tablaIDH, Country, IDH.propio)
+tablaIDH1 <- select(datos2018_19_sub, Country, IDH.propio, I.Health.alt, I.Education.alt, I.Income)
+#tablaIDH1 <- melt(tablaIDH1, id.vars = c("Country", "IDH.propio"))
+#names(tablaIDH1)[3] <- "Índices"
+#names(tablaIDH1)[4] <- "Valor"
+
+#Comparativa entre los Índices utilizados para el calculo y el HDI
+ggplot(tablaIDH1, aes(x = I.Health.alt, y = IDH.propio)) + 
+  geom_point() + 
+  geom_smooth() +
+  ggtitle("HDI propio respecto al Índice de Salud") + 
+  labs(x = "Índice de Salud", 
+       y = "HDI propio")#+
+  #facet_grid(~ NomCol) #Grafico de acuerdo a los valores de la variable "NomCol" (generalmente el "tipo" de algo)
+
+ggplot(tablaIDH1, aes(x = I.Education.alt, y = IDH.propio)) + 
+  geom_point() + 
+  geom_smooth()+
+  ggtitle("HDI propio respecto al Índice de Educación") + 
+  labs(x = "Índice de Educación", 
+       y = "HDI propio")
+
+ggplot(tablaIDH1, aes(x = I.Income, y = IDH.propio)) + 
+  geom_point() + 
+  geom_smooth()+
+  ggtitle("HDI propio respecto al Índice Económico") + 
+  labs(x = "PIB", 
+       y = "HDI propio")
+#ggsave("mi_grafico.png") #guarda el ultimo grafico generado
+
+tab1 <- select(datos2018_19_sub, Country, HDI, IDH.propio, I.Health.alt, I.Education.alt, I.Income)
+tab1 <- melt(tab1, id.vars = c("Country", "HDI", "IDH.propio"))
+names(tab1)[4] <- "Indices"
+names(tab1)[5] <- "Valor"
+
+#ggplot(tab1, aes(x = HDI, y = IDH.propio, colour= Indices)) + 
+#  geom_point() + 
+#  geom_smooth()+
+#  ggtitle("HDI propio respecto al Índice Económico") + 
+#  facet_grid(Indices ~.)
+
