@@ -1,3 +1,4 @@
+#Se cargan las librerías
 library(httr)
 library(jsonlite)
 library(reshape2)
@@ -44,7 +45,7 @@ names(HDR2019)[8] <- "MeanSchool"
 names(HDR2019)[10] <- "GNI.capita"
 names(HDR2019)[12] <- "GNI.HDI.rank"
 
-#Se cambia la estrctura de los datos (anteriormente 'chr')
+#Se cambia la estructura de los datos (anteriormente 'chr')
 HDR2019$HDI.rank <- as.numeric(HDR2019$HDI.rank)
 HDR2019$Country <- as.factor(HDR2019$Country)
 HDR2019$HDI <- as.numeric(HDR2019$HDI)
@@ -56,7 +57,7 @@ HDR2019$GNI.HDI.rank <- as.numeric(HDR2019$GNI.HDI.rank)
 HDR2019$HDI.rank.2019 <- as.numeric(HDR2019$HDI.rank.2019)
 str(HDR2019)
 
-#Calculo del indicador HDI 
+#Cálculo de indicadores
 #form: (valor-min)/(max-min)
 HDR2019$I.Health <- 
   (HDR2019$LifeExp - 20) / (85 - 20)
@@ -67,6 +68,7 @@ HDR2019$I.Education <-
 HDR2019$I.Income <-
   (log(HDR2019$GNI.capita) - log(100)) /
   (log(75000) - log(100))
+#Cálculo IDH
 HDR2019$HDI.calc <- 
   (HDR2019$I.Health * HDR2019$I.Education * 
      HDR2019$I.Income)^(1/3)
@@ -202,7 +204,7 @@ ggplot(tablaIDH1, aes(x = I.Health.alt, y = IDH.propio)) +
   ggtitle("HDI propio respecto al Índice de Salud") + 
   labs(x = "Índice de Salud", 
        y = "HDI propio")#+
-  #facet_grid(~ NomCol) #Grafico de acuerdo a los valores de la variable "NomCol" (generalmente el "tipo" de algo)
+  #facet_grid(~ NomCol) #Grafico de acuerdo a los valores de la variable "NomCol" 
 
 ggplot(tablaIDH1, aes(x = I.Education.alt, y = IDH.propio)) + 
   geom_point() + 
